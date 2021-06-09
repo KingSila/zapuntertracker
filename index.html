@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KingSila Bets Tracker</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+     * {
+  box-sizing: border-box;
+}   
+    </style>
+    <script type="text/javascript">
+
+        /***********************************************
+        * Drop Down Date select script- by JavaScriptKit.com
+        * This notice MUST stay intact for use
+        * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
+        ***********************************************/
+        
+        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+        
+        function populatedropdown(dayfield, monthfield, yearfield){
+        var today =new Date()
+        var dayfield=document.getElementById(dayfield)
+        var monthfield=document.getElementById(monthfield)
+        var yearfield=document.getElementById(yearfield)
+        for (var i=0; i<31; i++)
+        dayfield.options[i]=new Option(i, i+1)
+        dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+        for (var m=0; m<12; m++)
+        monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+        monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+        var thisyear=today.getFullYear()
+        for (var y=0; y<20; y++){
+        yearfield.options[y]=new Option(thisyear, thisyear)
+        thisyear+=1
+        }
+        yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+        }
+        
+        </script>
+</head>
+<body>
+    <h1>Sports Betting Tracker</h1>
+    <div class="column">
+        <form action="" name="someform">
+            <select id="daydropdown">
+            </select> 
+            <select id="monthdropdown">
+            </select> 
+            <select id="yeardropdown">
+            </select> 
+            </form>
+            
+            <script type="text/javascript">
+            
+            //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+            window.onload=function(){
+            populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+            }
+            </script>    
+    </div>
+    <div class="column">
+    <select name="sports" id="sports">
+        <option value="">--select--</option>
+        <option value="soccer">soccer</option>
+        <option value="basketball">basketball</option>
+        <option value="darts">darts</option>
+        <option value="baseball">baseball</option>
+        <option value="tennis">tennis</option>
+        <option value="rugby">rugby</option>
+        <option value="rugby">horseracing</option>
+      </select>
+      <h2 id="pick"></h2>
+    </div>
+    <div class="column">
+        <select name="punter" id="punter">
+            <option value="">--select--</option>
+            <option value="Pyscho">Pyscho</option>
+            <option value="el Professor Wiz">el Professor Wiz</option>
+            <option value="Pusha Punters">Pusha Punters</option>
+            <option value="Getrichquick2021">Getrichquick2021</option>
+            <option value="Green Hoodie">Green Hoodie</option>
+            <option value="Boom Squad">Boom Squad</option>
+            <option value="SQ Mweza">SQ Mweza</option>
+            <option value="Twitter feed">Twitter feed</option>
+            <option value="Facebook feed">Facebook feed</option>
+            <option value="Whatsapp feed">Whatsapp feed</option>
+          </select>
+          <h2 id="pick"></h2>
+        </div>
+        <div class="column">
+            <select name="bookie" id="bookie">
+                <option value="">--select--</option>
+                <option value="betway">betway</option>
+                <option value="sportingbet 1">sportingbet 1</option>
+                <option value="sportingbet 2">sportingbet 2</option>
+                <option value="1xbet">1xbet</option>
+                <option value="gbets">gbets</option>
+              </select>
+              <h2 id="pick"></h2>
+            </div>
+            <div class="column">
+                <label for="odds">Odds:</label>
+                <input type="text" id="odds" maxlength="8" size="4"><br><br>   
+            </div>  
+            <div class="column">
+                <label for="stake" class="form-control">Stake:</label>
+                <input type="text" id="stake" maxlength="4" size="4" class="form-control"><br><br>   
+            </div>
+
+            <div class="column">
+                <input type="radio" id="lose" name="result" value="lose">
+                <label for="lose">Lose</label><br>
+                <input type="radio" id="win" name="result" value="win">
+                <label for="win">Win</label><br>
+                <input type="radio" id="cashout" name="result" value="cashout">
+                <label for="cashout">Cashout</label>
+                  <h2 id="pick"></h2>
+            </div>
+            <div class="column"></div>
+                <label for="pnl" class="form-control">Profit/Loss</label><br>
+                <input type="text" class="form-control" value='0.00' id="pnl" size="6"><br><br>
+                <button type="button" onclick="alert('You pressed the button!')">Add</button> 
+            </div>
+
+            </body>
+</body>
+</html>
