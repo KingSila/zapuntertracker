@@ -11,57 +11,47 @@
   box-sizing: border-box;
 }   
     </style>
-    <script type="text/javascript">
-
-        /***********************************************
-        * Drop Down Date select script- by JavaScriptKit.com
-        * This notice MUST stay intact for use
-        * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
-        ***********************************************/
+    <script type="text/javascript" src="./app.js"></script>
+    
         
-        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-        
-        function populatedropdown(dayfield, monthfield, yearfield){
-        var today =new Date()
-        var dayfield=document.getElementById(dayfield)
-        var monthfield=document.getElementById(monthfield)
-        var yearfield=document.getElementById(yearfield)
-        for (var i=0; i<31; i++)
-        dayfield.options[i]=new Option(i, i+1)
-        dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-        for (var m=0; m<12; m++)
-        monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-        monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-        var thisyear=today.getFullYear()
-        for (var y=0; y<20; y++){
-        yearfield.options[y]=new Option(thisyear, thisyear)
-        thisyear+=1
-        }
-        yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
-        }
-        
-        </script>
 </head>
 <body>
     <h1>Sports Betting Tracker</h1>
     <div class="column">
-        <form action="" name="someform">
-            <select id="daydropdown">
-            </select> 
-            <select id="monthdropdown">
-            </select> 
-            <select id="yeardropdown">
-            </select> 
-            </form>
-            
-            <script type="text/javascript">
-            
-            //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
-            window.onload=function(){
-            populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
-            }
-            </script>    
+        <select class="bear-dates" id="daydropdown"></select>
+        <select class="bear-months" id="monthdropdown"></select>
+        <select class="bear-years" id="yeardropdown"></select>   
     </div>
+    <h3 id="dayselected"></h3>
+
+    <script type="text/javascript">
+    const element1 = document.getElementById("daydropdown");
+   // var month = document.getElementById('monthdropdown').value;
+   // var year = document.getElementById('yeardropdown').value;
+
+   element1.addEventListener("change", (f) => {
+            const value1 = f.target.value;
+            const text1 = element1.options[element1.selectedIndex].text;
+           
+            if (value1) {
+              document.getElementById("dayselected").textContent = `Value Selected: ${value1}`;
+              
+            } else {
+              document.getElementById("dayselected").textContent = "";
+              
+            }
+          });
+    // if you simply want to display it:
+    //var text = 'The selected date is: '+year+'-'+month+'-'+day;
+    //(text);
+    </script>
+    <script src="./calender.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    dates('option');
+    months('option');
+    
+    years('option', 2019, 2022);
+</script>
     <div class="column">
     <select name="sports" id="sports">
         <option value="">--select--</option>
@@ -71,9 +61,29 @@
         <option value="baseball">baseball</option>
         <option value="tennis">tennis</option>
         <option value="rugby">rugby</option>
-        <option value="rugby">horseracing</option>
+        <option value="horseracing">horseracing</option>
       </select>
       <h2 id="pick"></h2>
+      
+    <script type="text/javascript">
+        const element = document.getElementById("sports");
+       
+             element.addEventListener("change", (e) => {
+            const value = e.target.value;
+            const text = element.options[element.selectedIndex].text;
+           
+            if (value) {
+              document.getElementById("pick").textContent = `Value Selected: ${value}`;
+              
+            } else {
+              document.getElementById("pick").textContent = "";
+              
+            }
+          });
+          </script>
+
+      
+
     </div>
     <div class="column">
         <select name="punter" id="punter">
