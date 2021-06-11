@@ -3,12 +3,12 @@
          include_once 'dbh.inc.php';
 
         $betdate = $_POST['betdate'];
-        $sports = $_POST['value'];
-        $puntervalue = $_POST['puntervalue'];
-        $bookievalue = $_POST['bookievalue'];
+        $sports = $_POST['sports'];
+        $puntervalue = $_POST['punter'];
+        $bookievalue = $_POST['bookie'];
         $odds = $_POST['odds'];
         $stake = $_POST['stake'];
-        $resultvalue = $_POST['resultvalue'];
+        $resultvalue = $_POST['result'];
         $pnl = $_POST['pnl'];
         
 

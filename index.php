@@ -18,7 +18,7 @@
 <body>
 
     
-    <form action="includes/addbetdetails.php" method="post">
+    <form action="includes/betsentry.inc.php" method="post">
 
     <h1>Sports Betting Tracker</h1>
     <div class="column">
