@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingSila Bets Tracker</title>
@@ -16,41 +16,18 @@
         
 </head>
 <body>
+
+    
+    <form action="addbetdetails.php" method="post">
+
     <h1>Sports Betting Tracker</h1>
     <div class="column">
-        <select class="bear-dates" id="daydropdown"></select>
-        <select class="bear-months" id="monthdropdown"></select>
-        <select class="bear-years" id="yeardropdown"></select>   
-    </div>
-    <h3 id="dayselected"></h3>
-
-    <script type="text/javascript">
-    const element1 = document.getElementById("daydropdown");
-   // var month = document.getElementById('monthdropdown').value;
-   // var year = document.getElementById('yeardropdown').value;
-
-   element1.addEventListener("change", (f) => {
-            const value1 = f.target.value;
-            const text1 = element1.options[element1.selectedIndex].text;
+        <input type="date" name="betdate" placeholder="Betdate">
            
-            if (value1) {
-              document.getElementById("dayselected").textContent = `Value Selected: ${value1}`;
-              
-            } else {
-              document.getElementById("dayselected").textContent = "";
-              
-            }
-          });
-    // if you simply want to display it:
-    //var text = 'The selected date is: '+year+'-'+month+'-'+day;
-    //(text);
-    </script>
-    <script src="./calender.js" type="text/javascript"></script>
+    </div>
+
     <script type="text/javascript">
-    dates('option');
-    months('option');
-    
-    years('option', 2019, 2022);
+   
 </script>
     <div class="column">
     <select name="sports" id="sports">
@@ -63,7 +40,7 @@
         <option value="rugby">rugby</option>
         <option value="horseracing">horseracing</option>
       </select>
-      <h2 id="pick"></h2>
+     
       
     <script type="text/javascript">
         const element = document.getElementById("sports");
@@ -73,7 +50,7 @@
             const text = element.options[element.selectedIndex].text;
            
             if (value) {
-              document.getElementById("pick").textContent = `Value Selected: ${value}`;
+              document.getElementById("pick").textContent = `Sport Selected: ${value}`;
               
             } else {
               document.getElementById("pick").textContent = "";
@@ -99,7 +76,24 @@
             <option value="Facebook feed">Facebook feed</option>
             <option value="Whatsapp feed">Whatsapp feed</option>
           </select>
-          <h2 id="pick"></h2>
+        
+          
+    <script type="text/javascript">
+        const punterelement = document.getElementById("punter");
+       
+             punterelement.addEventListener("change", (i) => {
+            const puntervalue = i.target.value;
+            const puntertext = punterelement.options[punterelement.selectedIndex].text;
+           
+            if (puntervalue) {
+              document.getElementById("punterpick").textContent = `Punter Selected: ${puntervalue}`;
+              
+            } else {
+              document.getElementById("punterpick").textContent = "";
+              
+            }
+          });
+          </script>
         </div>
         <div class="column">
             <select name="bookie" id="bookie">
@@ -110,7 +104,24 @@
                 <option value="1xbet">1xbet</option>
                 <option value="gbets">gbets</option>
               </select>
-              <h2 id="pick"></h2>
+             
+
+              <script type="text/javascript">
+                const bookieelement = document.getElementById("bookie");
+               
+                bookieelement.addEventListener("change", (j) => {
+                    const bookievalue = j.target.value;
+                    const bookietext = bookieelement.options[bookieelement.selectedIndex].text;
+                   
+                    if (bookievalue) {
+                      document.getElementById("bookiepick").textContent = `Bookie Selected: ${bookievalue}`;
+                      
+                    } else {
+                      document.getElementById("bookiepick").textContent = "";
+                      
+                    }
+                  });
+                  </script>
             </div>
             <div class="column">
                 <label for="odds">Odds:</label>
@@ -122,20 +133,43 @@
             </div>
 
             <div class="column">
-                <input type="radio" id="lose" name="result" value="lose">
-                <label for="lose">Lose</label><br>
-                <input type="radio" id="win" name="result" value="win">
-                <label for="win">Win</label><br>
-                <input type="radio" id="cashout" name="result" value="cashout">
-                <label for="cashout">Cashout</label>
-                  <h2 id="pick"></h2>
-            </div>
+                <select name="result" id="result">
+                    <option value="">--select--</option>
+                    <option value="Win">Win</option>
+                    <option value="Lose">Lose</option>
+                    <option value="Cashout stake">Cashout stake</option>
+                    <option value="Cashout half Stake">Cashout half Stake</option>
+                    <option value="Cashout 2X stake">Cashout 2X stake</option>
+                    <option value="Cashout 80% Return">Cashout 80% Return</option>
+                  </select>
+                  
+                  
+            <script type="text/javascript">
+                const resultelement = document.getElementById("result");
+               
+                resultelement.addEventListener("change", (k) => {
+                    const resultvalue = k.target.value;
+                    const resulttext = resultelement.options[resultelement.selectedIndex].text;
+                   
+                    if (resultvalue) {
+                      getInputValue();
+      
+                  } else {
+                      document.getElementById("pnl").value = 0.00;
+                      
+                    }
+                  });
+                  </script>
+                </div>
+            
             <div class="column"></div>
                 <label for="pnl" class="form-control">Profit/Loss</label><br>
-                <input type="text" class="form-control" value='0.00' id="pnl" size="6"><br><br>
-                <button type="button" onclick="alert('You pressed the button!')">Add</button> 
+                <input type="text" id='pnl' value='0.00' id="pnl" size="6"><br><br>
+                <input type="submit" name="submit">
             </div>
-
-            </body>
+           
+            <script src="./app.js" type="text/javascript"></script>
+        </form>
+          
 </body>
 </html>
