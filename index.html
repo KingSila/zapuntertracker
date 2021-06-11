@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingSila Bets Tracker</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="includes/main.css">
     <style>
      * {
   box-sizing: border-box;
 }   
     </style>
-    <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="includes/app.js"></script>
     
         
 </head>
 <body>
 
     
-    <form action="addbetdetails.php" method="post">
+    <form action="includes/addbetdetails.php" method="post">
 
     <h1>Sports Betting Tracker</h1>
     <div class="column">
@@ -49,13 +49,7 @@
             const value = e.target.value;
             const text = element.options[element.selectedIndex].text;
            
-            if (value) {
-              document.getElementById("pick").textContent = `Sport Selected: ${value}`;
-              
-            } else {
-              document.getElementById("pick").textContent = "";
-              
-            }
+          
           });
           </script>
 
@@ -85,14 +79,7 @@
              punterelement.addEventListener("change", (i) => {
             const puntervalue = i.target.value;
             const puntertext = punterelement.options[punterelement.selectedIndex].text;
-           
-            if (puntervalue) {
-              document.getElementById("punterpick").textContent = `Punter Selected: ${puntervalue}`;
-              
-            } else {
-              document.getElementById("punterpick").textContent = "";
-              
-            }
+        
           });
           </script>
         </div>
@@ -113,14 +100,7 @@
                 bookieelement.addEventListener("change", (j) => {
                     const bookievalue = j.target.value;
                     const bookietext = bookieelement.options[bookieelement.selectedIndex].text;
-                   
-                    if (bookievalue) {
-                      document.getElementById("bookiepick").textContent = `Bookie Selected: ${bookievalue}`;
-                      
-                    } else {
-                      document.getElementById("bookiepick").textContent = "";
-                      
-                    }
+               
                   });
                   </script>
             </div>
@@ -169,7 +149,6 @@
                 <input type="submit" name="submit">
             </div>
            
-            <script src="./app.js" type="text/javascript"></script>
         </form>
           
 </body>
