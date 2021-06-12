@@ -1,3 +1,7 @@
+<?php
+    include_once 'includes/dbh.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +36,13 @@
     <div class="column">
     <select name="sports" id="sports">
         <option value="">--select--</option>
-        <option value="soccer">soccer</option>
-        <option value="basketball">basketball</option>
-        <option value="darts">darts</option>
-        <option value="baseball">baseball</option>
-        <option value="tennis">tennis</option>
-        <option value="rugby">rugby</option>
-        <option value="horseracing">horseracing</option>
+        <option value="Football">soccer</option>
+        <option value="Basketball">basketball</option>
+        <option value="Darts">darts</option>
+        <option value="Baseball">baseball</option>
+        <option value="Tennis">tennis</option>
+        <option value="Rugby">rugby</option>
+        <option value="Horse Racing">horseracing</option>
       </select>
      
       
@@ -52,8 +56,6 @@
           
           });
           </script>
-
-      
 
     </div>
     <div class="column">
@@ -150,6 +152,32 @@
             </div>
            
         </form>
-          
+
+         
+
+         <?php
+              
+             $query = "
+             
+             SELECT count(*)  as pick_totals FROM `bettingtracker`;
+
+             SELECT count(*) as wins  FROM `bettingtracker` where outcome='Win';
+             
+             ";
+
+
+             $result = mysqli_multi_query($conn,$query);
+            
+             if($result){
+                echo "Query executed";
+             }else{
+               echo "Soemthing went wrong";
+             }
+
+  
+        ?>
+
+
+
 </body>
 </html>
