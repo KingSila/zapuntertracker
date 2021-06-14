@@ -1,5 +1,6 @@
 <?php
     include_once 'includes/dbh.inc.php';
+  
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +13,8 @@
     <link rel="stylesheet" href="includes/main.css">
     <style>
      * {
-  box-sizing: border-box;
-}   
+       box-sizing: border-box;
+        }   
     </style>
     <script type="text/javascript" src="includes/app.js"></script>
     
@@ -25,16 +26,22 @@
     <form action="includes/betsentry.inc.php" method="post">
 
     <h1>Sports Betting Tracker</h1>
-    <div class="column">
-        <input type="date" name="betdate" placeholder="Betdate">
-           
-    </div>
 
-    <script type="text/javascript">
-   
-</script>
-    <div class="column">
-    <select name="sports" id="sports">
+          <table border="2">
+          <tr>
+          <th>Date</th>
+           <th>Sport</th>
+           <th>Punter</th>
+           <th>Bookie</th>
+           <th>Odds </th>
+           <th>Rands Staked </th>
+           <th>Result </th>
+           <th>Profit/Loss</th>
+          </tr>
+          </td> <td>
+         <input type="date" name="betdate" placeholder="Betdate">
+         </td> <td>
+        <select name="sports" id="sports">
         <option value="">--select--</option>
         <option value="Football">soccer</option>
         <option value="Basketball">basketball</option>
@@ -43,11 +50,11 @@
         <option value="Tennis">tennis</option>
         <option value="Rugby">rugby</option>
         <option value="Horse Racing">horseracing</option>
-      </select>
+         </select>
      
       
-    <script type="text/javascript">
-        const element = document.getElementById("sports");
+            <script type="text/javascript">
+           const element = document.getElementById("sports");
        
              element.addEventListener("change", (e) => {
             const value = e.target.value;
@@ -57,9 +64,9 @@
           });
           </script>
 
-    </div>
-    <div class="column">
-        <select name="punter" id="punter">
+   
+            </td> <td>
+            <select name="punter" id="punter">
             <option value="">--select--</option>
             <option value="Pyscho">Pyscho</option>
             <option value="Odds Mafia">Odds Mafia</option>
@@ -84,9 +91,9 @@
         
           });
           </script>
-        </div>
-        <div class="column">
-            <select name="bookie" id="bookie">
+        
+                </td> <td>
+                <select name="bookie" id="bookie">
                 <option value="">--select--</option>
                 <option value="betway">betway</option>
                 <option value="sportingbet 1">sportingbet 1</option>
@@ -105,32 +112,28 @@
                
                   });
                   </script>
-            </div>
-            <div class="column">
-                <label for="odds">Odds:</label>
-                <input type="text" id="odds" name="odds" maxlength="8" size="4"><br><br>   
-            </div>  
-            <div class="column">
-                <label for="stake" class="form-control">Stake:</label>
-                <input type="text" id="stake" name="stake" maxlength="4" size="4" class="form-control"><br><br>   
-            </div>
-
-            <div class="column">
-                <select name="result" id="result">
-                    <option value="">--select--</option>
-                    <option value="Win">Win</option>
-                    <option value="Lose">Lose</option>
-                    <option value="Cashout stake">Cashout stake</option>
-                    <option value="Cashout half Stake">Cashout half Stake</option>
-                    <option value="Cashout 2X stake">Cashout 2X stake</option>
-                    <option value="Cashout 80% Return">Cashout 80% Return</option>
+         
+           
+                  </td> <td>
+                  <input type="text" id="odds" name="odds" maxlength="8" size="4">
+                  </td> <td>
+                  <input type="text" id="stake" name="stake" maxlength="4" size="4" class="form-control"> 
+                  </td> <td>
+                  <select name="result" id="result">
+                  <option value="">--select--</option>
+                  <option value="Win">Win</option>
+                  <option value="Lose">Lose</option>
+                  <option value="Cashout stake">Cashout stake</option>
+                  <option value="Cashout half Stake">Cashout half Stake</option>
+                  <option value="Cashout 2X stake">Cashout 2X stake</option>
+                  <option value="Cashout 80% Return">Cashout 80% Return</option>
                   </select>
                   
                   
-            <script type="text/javascript">
+                 <script type="text/javascript">
                 const resultelement = document.getElementById("result");
                
-                resultelement.addEventListener("change", (k) => {
+                 resultelement.addEventListener("change", (k) => {
                     const resultvalue = k.target.value;
                     const resulttext = resultelement.options[resultelement.selectedIndex].text;
                    
@@ -145,38 +148,103 @@
                   </script>
                 </div>
             
-            <div class="column"></div>
-                <label for="pnl" class="form-control">Profit/Loss</label><br>
-                <input type="text" name='pnl' value='0.00' id="pnl" size="6"><br><br>
+           
+                </td> <td>
+                <input type="text" name='pnl' value='0.00' id="pnl" size="6">
+                </td> <td>
                 <button type="submit" name="submit">Add bet</button>
             </div>
            
         </form>
+        </tr>
+        </table>    
 
+        <label for="SEPARATOR">===========================================================================================================</label>
          
-
+        <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Average Odds </th>
+           <th>Rands Staked </th>
+           <th>Total Profit </th>
+           <th>Average Stake </th>
+         </tr>
+    
          <?php
-              
-             $query = "
              
-             SELECT count(*)  as pick_totals FROM `bettingtracker`;
-
-             SELECT count(*) as wins  FROM `bettingtracker` where outcome='Win';
+              $sql = "SELECT COUNT(*) as betstotal from bettingtracker";
+              $result = mysqli_query($conn,$sql);
              
-             ";
-
-
-             $result = mysqli_multi_query($conn,$query);
+              print "</td> <td>";
+            while($r = mysqli_fetch_array($result))
+            {
+                echo  $r['betstotal']; 
+                print "</td> <td>";
+            }
             
-             if($result){
-                echo "Query executed";
-             }else{
-               echo "Soemthing went wrong";
-             }
 
-  
-        ?>
+            $sql1 = "SELECT COUNT(*) as wins from bettingtracker where outcome='Win'";
+            $result1 = mysqli_query($conn,$sql1);
+           
+          while($r = mysqli_fetch_array($result1))
+          {
+              echo  $r['wins'];
+              print "</td> <td>";
+          }
 
+          $sql2 = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker)
+          AS win_percentage FROM bettingtracker where outcome='Win'";
+          $result2 = mysqli_query($conn,$sql2);
+         
+        while($r = mysqli_fetch_array($result2))
+        {
+            echo  $r['win_percentage'];
+            print "</td> <td>";
+        }
+
+        $sql3 = "SELECT ROUND(sum(odds)/count(*),2) as average_odds FROM `bettingtracker`";
+          $result3 = mysqli_query($conn,$sql3);
+         
+        while($r = mysqli_fetch_array($result3))
+        {
+            echo  $r['average_odds'];
+            print "</td> <td>";
+        }
+
+        $sql4 = "SELECT SUM(stake) as rands_staked FROM `bettingtracker`";
+        $result4 = mysqli_query($conn,$sql4);
+       
+      while($r = mysqli_fetch_array($result4))
+      {
+          echo  $r['rands_staked'];
+          print "</td> <td>";
+      }
+
+      $sql5 = "SELECT ROUND(SUM(pnl), 2) as Total_Profit FROM `bettingtracker`";
+      $result5 = mysqli_query($conn,$sql5);
+     
+    while($r = mysqli_fetch_array($result5))
+    {
+        echo  $r['Total_Profit'];
+        print "</td> <td>";
+       
+    }
+
+    $sql6 = "SELECT ROUND(SUM(STAKE) / (SELECT COUNT(*) FROM bettingtracker),2) AS averagestake FROM bettingtracker";
+    $result6 = mysqli_query($conn,$sql6);
+   
+  while($r = mysqli_fetch_array($result6))
+  {
+      echo  $r['averagestake'];
+     
+    
+  }
+
+    ?>
+    </table>
+ 
 
 
 </body>
