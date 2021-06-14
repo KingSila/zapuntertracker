@@ -245,6 +245,244 @@
     ?>
     </table>
  
+     
+    <label for="SEPARATOR">===========================================================================================================</label><br>
+    <label for="SEPARATOR">Yesterday</label>
+    <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Average Odds </th>
+           <th>Rands Staked </th>
+           <th>Total Profit </th>
+         </tr>
+
+         <?php
+             
+             $sql = "SELECT count(*) as yesterdaybetstotal FROM `bettingtracker` 
+             WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)";
+             $result = mysqli_query($conn,$sql);
+            
+             print "</td> <td>";
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['yesterdaybetstotal']; 
+               print "</td> <td>";
+           }
+
+           $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+            and outcome='Win'";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['winstotal']; 
+             print "</td> <td>";
+         }
+
+         $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY))
+         AS ywin_percentage FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+            and outcome='Win'";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['ywin_percentage']; 
+             print "</td> <td>";
+         }
+         $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+          ";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['yaverage_odds']; 
+             print "</td> <td>";
+         }
+         $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+         ";
+          $result = mysqli_query($conn,$sql);
+         
+         
+        while($r = mysqli_fetch_array($result))
+        {
+            echo  $r['yrandsstaked']; 
+            print "</td> <td>";
+        }
+        $sql = "SELECT sum(pnl) as ypnl FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+        ";
+         $result = mysqli_query($conn,$sql);
+        
+        
+       while($r = mysqli_fetch_array($result))
+       {
+           echo  $r['ypnl']; 
+          
+       }
+
+      ?>
+      </table>
+
+      <label for="SEPARATOR">===========================================================================================================</label><br>
+      <label for="SEPARATOR">Last 7 Days</label>
+      <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Average Odds </th>
+           <th>Rands Staked </th>
+           <th>Total Profit </th>
+         </tr>
+       
+         <?php
+             
+             $sql = "SELECT count(*) as yesterdaybetstotal FROM `bettingtracker` 
+             WHERE date > now() - INTERVAL 7 day";
+             $result = mysqli_query($conn,$sql);
+            
+             print "</td> <td>";
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['yesterdaybetstotal']; 
+               print "</td> <td>";
+           }
+
+           $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day
+            and outcome='Win'";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['winstotal']; 
+             print "</td> <td>";
+         }
+
+         $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date > now() - INTERVAL 7 day)
+         AS ywin_percentage FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day
+            and outcome='Win'";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['ywin_percentage']; 
+             print "</td> <td>";
+         }
+         $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['yaverage_odds']; 
+             print "</td> <td>";
+         }
+         $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
+          $result = mysqli_query($conn,$sql);
+         
+         
+        while($r = mysqli_fetch_array($result))
+        {
+            echo  $r['yrandsstaked']; 
+            print "</td> <td>";
+        }
+        $sql = "SELECT sum(pnl)  as weekpnl FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
+        $result = mysqli_query($conn,$sql);
+       
+       
+      while($r = mysqli_fetch_array($result))
+      {
+          echo  $r['weekpnl']; 
+         
+      }
+
+        
+
+       ?>
+       </table>
+
+       <label for="SEPARATOR">===========================================================================================================</label><br>
+      <label for="SEPARATOR">Last 30 Days</label>
+
+      <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Average Odds </th>
+           <th>Rands Staked </th>
+           <th>Total Profit </th>
+         </tr>
+       
+         <?php
+                  $sql = "SELECT count(*) as monthbetstotal FROM `bettingtracker` 
+                  WHERE date > now() - INTERVAL 30 day";
+                  $result = mysqli_query($conn,$sql);
+                 
+                  print "</td> <td>";
+                while($r = mysqli_fetch_array($result))
+                {
+                    echo  $r['monthbetstotal']; 
+                    print "</td> <td>";
+                }
+                $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day
+                and outcome='Win'";
+               $result = mysqli_query($conn,$sql);
+              
+              
+             while($r = mysqli_fetch_array($result))
+             {
+                 echo  $r['winstotal']; 
+                 print "</td> <td>";
+             }
+    
+             $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date > now() - INTERVAL 30 day)
+             AS ywin_percentage FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day
+                and outcome='Win'";
+               $result = mysqli_query($conn,$sql);
+              
+              
+             while($r = mysqli_fetch_array($result))
+             {
+                 echo  $r['ywin_percentage']; 
+                 print "</td> <td>";
+             }
+             $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
+               $result = mysqli_query($conn,$sql);
+              
+              
+             while($r = mysqli_fetch_array($result))
+             {
+                 echo  $r['yaverage_odds']; 
+                 print "</td> <td>";
+             }
+             $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
+              $result = mysqli_query($conn,$sql);
+             
+             
+            while($r = mysqli_fetch_array($result))
+            {
+                echo  $r['yrandsstaked']; 
+                print "</td> <td>";
+            }
+            $sql = "SELECT sum(pnl)  as weekpnl FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
+            $result = mysqli_query($conn,$sql);
+           
+           
+          while($r = mysqli_fetch_array($result))
+          {
+              echo  $r['weekpnl']; 
+             
+          }
+   
+       ?>
+     
 
 
 </body>
