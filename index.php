@@ -482,8 +482,142 @@
           }
    
        ?>
-     
+        </table>
 
+        <label for="SEPARATOR">===========================================================================================================</label><br>
+        <label for="SEPARATOR">Monthly Stats</label><br>
+        <label for="SEPARATOR">MAY 2021</label>
+          
+      <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Total Deposits</th>
+           <th>Total Profit/Loss</th>
+         </tr>
+         <?php
+                  $sql = "SELECT count(*) as maytotal  FROM `bettingtracker` 
+                  WHERE MONTH(date) = 05 AND YEAR(date) = 2021";
+                  $result = mysqli_query($conn,$sql);
+                 
+                  print "</td> <td>";
+                while($r = mysqli_fetch_array($result))
+                {
+                    echo  $r['maytotal']; 
+                    print "</td> <td>";
+                }
+                $sql = "SELECT count(*) as maywinstotal FROM `bettingtracker` WHERE MONTH(date) = 05 AND YEAR(date) = 2021
+                and outcome='Win'";
+               $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+               {
+                  echo  $r['maywinstotal']; 
+                 print "</td> <td>";
+               }
+    
+               $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE MONTH(date) = 05 AND YEAR(date) = 2021)
+               AS mayywin_percentage FROM `bettingtracker` WHERE MONTH(date) = 05 AND YEAR(date) = 2021
+                and outcome='Win'";
+                $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+              {
+                 echo  $r['mayywin_percentage']; 
+                 print "</td> <td>";
+              }
+              $sql = "SELECT SUM(amount) as maydeposit from deposits WHERE MONTH(date) = 05 AND YEAR(date) = 2021";
+               $result = mysqli_query($conn,$sql);
+             
+             
+              while($r = mysqli_fetch_array($result))
+             {
+                echo  $r['maydeposit']; 
+                print "</td> <td>";
+             }
+             $sql = "SELECT sum(pnl)  as maypnl FROM `bettingtracker` WHERE MONTH(date) = 05 AND YEAR(date) = 2021";
+             $result = mysqli_query($conn,$sql);
+            
+            
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['maypnl']; 
+              
+           }
+
+
+
+        ?>
+        </table>
+        
+        <label for="SEPARATOR">===========================================================================================================</label><br>
+        <label for="SEPARATOR">JUNE 2021</label>
+          
+      <table border="2">
+          <tr>
+           <th>Number of Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Total Deposits</th>
+           <th>Total Profit/Loss</th>
+         </tr>
+         <?php
+                  $sql = "SELECT count(*) as junetotal  FROM `bettingtracker` 
+                  WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+                  $result = mysqli_query($conn,$sql);
+                 
+                  print "</td> <td>";
+                while($r = mysqli_fetch_array($result))
+                {
+                    echo  $r['junetotal']; 
+                    print "</td> <td>";
+                }
+                $sql = "SELECT count(*) as junewinstotal FROM `bettingtracker` WHERE MONTH(date) = 06 AND YEAR(date) = 2021
+                and outcome='Win'";
+               $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+               {
+                  echo  $r['junewinstotal']; 
+                 print "</td> <td>";
+               }
+    
+               $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE MONTH(date) = 06 AND YEAR(date) = 2021)
+               AS juneywin_percentage FROM `bettingtracker` WHERE MONTH(date) = 06 AND YEAR(date) = 2021
+                and outcome='Win'";
+                $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+              {
+                 echo  $r['juneywin_percentage']; 
+                 print "</td> <td>";
+              }
+              $sql = "SELECT SUM(amount) as junedeposit from deposits WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+               $result = mysqli_query($conn,$sql);
+             
+             
+              while($r = mysqli_fetch_array($result))
+             {
+                echo  $r['junedeposit']; 
+                print "</td> <td>";
+             }
+             $sql = "SELECT sum(pnl)  as junepnl FROM `bettingtracker` WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+             $result = mysqli_query($conn,$sql);
+            
+            
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['junepnl']; 
+              
+           }
+
+        ?>
+        </table>
 
 </body>
 </html>
