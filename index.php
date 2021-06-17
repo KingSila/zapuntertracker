@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="includes/main.css">
     <style>
      * {
-       box-sizing: border-box;
+    box-sizing: border-box;
         }   
     </style>
     <script type="text/javascript" src="includes/app.js"></script>
@@ -30,13 +30,13 @@
           <table border="2">
           <tr>
           <th>Date</th>
-           <th>Sport</th>
-           <th>Punter</th>
-           <th>Bookie</th>
-           <th>Odds </th>
-           <th>Rands Staked </th>
-           <th>Result </th>
-           <th>Profit/Loss</th>
+<th>Sport</th>
+<th>Punter</th>
+<th>Bookie</th>
+<th>Odds </th>
+<th>Rands Staked </th>
+<th>Result </th>
+<th>Profit/Loss</th>
           </tr>
           </td> <td>
          <input type="date" name="betdate" placeholder="Betdate">
