@@ -511,6 +511,7 @@
            <th>Win%</th>
            <th>Total Deposits</th>
            <th>Total Profit/Loss</th>
+           <th>Total withdrawals </th>
          </tr>
          <?php
                   $sql = "SELECT count(*) as maytotal  FROM `bettingtracker` 
@@ -560,9 +561,19 @@
             
            while($r = mysqli_fetch_array($result))
            {
-               echo  $r['maypnl']; 
+               echo  $r['maypnl'];
+               print "</td> <td>";
               
            }
+           $sql = "SELECT SUM(amount) as maytotalwithdrawals from withdrawals WHERE MONTH(date) = 05 AND YEAR(date) = 2021";
+               $result = mysqli_query($conn,$sql);
+             
+             
+              while($r = mysqli_fetch_array($result))
+             {
+                echo  $r['maytotalwithdrawals']; 
+                
+             }
 
 
 
@@ -579,6 +590,7 @@
            <th>Win%</th>
            <th>Total Deposits</th>
            <th>Total Profit/Loss</th>
+           <th>Total withdrawals </th>
          </tr>
          <?php
                   $sql = "SELECT count(*) as junetotal  FROM `bettingtracker` 
@@ -631,6 +643,15 @@
                echo  $r['junepnl']; 
               
            }
+           $sql = "SELECT SUM(amount) as junetotalwithdrawals from withdrawals WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+           $result = mysqli_query($conn,$sql);
+         
+         
+          while($r = mysqli_fetch_array($result))
+         {
+            echo  $r['junetotalwithdrawals']; 
+            
+         }
 
         ?>
         </table>
