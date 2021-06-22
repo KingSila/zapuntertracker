@@ -634,7 +634,7 @@
                 echo  $r['junedeposit']; 
                 print "</td> <td>";
              }
-             $sql = "SELECT sum(pnl)  as junepnl FROM `bettingtracker` WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+             $sql = "SELECT sum(pnl)  as junepnl FROM `bettingtracker` WHERE MONTH(date) = 06 ";
              $result = mysqli_query($conn,$sql);
             
             
@@ -643,7 +643,7 @@
                echo  $r['junepnl']; 
               
            }
-           $sql = "SELECT SUM(amount) as junetotalwithdrawals from withdrawals WHERE MONTH(date) = 06 AND YEAR(date) = 2021";
+           $sql = "SELECT SUM(amount) as junetotalwithdrawals from withdrawals WHERE MONTH(date) = 06 ";
            $result = mysqli_query($conn,$sql);
          
          
