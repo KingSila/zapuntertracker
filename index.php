@@ -38,9 +38,9 @@
 <th>Result </th>
 <th>Profit/Loss</th>
           </tr>
-          </td> <td>
-         <input type="date" name="betdate" placeholder="Betdate">
-         </td> <td>
+        </td> <td>
+        <input type="date" name="betdate" placeholder="Betdate">
+        </td> <td>
         <select name="sports" id="sports">
         <option value="">--select--</option>
         <option value="soccer">soccer</option>
@@ -51,21 +51,21 @@
         <option value="Tennis">tennis</option>
         <option value="Rugby">rugby</option>
         <option value="Horse Racing">horseracing</option>
-         </select>
-     
+        </select>
+  
       
-            <script type="text/javascript">
-           const element = document.getElementById("sports");
-       
-             element.addEventListener("change", (e) => {
+          <script type="text/javascript">
+          const element = document.getElementById("sports");
+      
+            element.addEventListener("change", (e) => {
             const value = e.target.value;
             const text = element.options[element.selectedIndex].text;
-           
+          
           
           });
           </script>
 
-   
+  
             </td> <td>
             <select name="punter" id="punter">
             <option value="">--select--</option>
@@ -87,9 +87,9 @@
         
           
     <script type="text/javascript">
-        const punterelement = document.getElementById("punter");
-       
-             punterelement.addEventListener("change", (i) => {
+            const punterelement = document.getElementById("punter");
+      
+            punterelement.addEventListener("change", (i) => {
             const puntervalue = i.target.value;
             const puntertext = punterelement.options[punterelement.selectedIndex].text;
         
@@ -106,11 +106,11 @@
                 <option value="sportingbet 2">sportingbet 2</option>
                 <option value="gbets">gbets</option>
               </select>
-             
+            
 
               <script type="text/javascript">
                 const bookieelement = document.getElementById("bookie");
-               
+              
                 bookieelement.addEventListener("change", (j) => {
                     const bookievalue = j.target.value;
                     const bookietext = bookieelement.options[bookieelement.selectedIndex].text;
@@ -175,6 +175,7 @@
            <th>Rands Staked </th>
            <th>Total Profit </th>
            <th>Average Stake </th>
+           <th>Total withdrawals </th>
          </tr>
     
          <?php
@@ -234,18 +235,28 @@
     {
         echo  $r['Total_Profit'];
         print "</td> <td>";
-       
+      
     }
 
     $sql6 = "SELECT ROUND(SUM(STAKE) / (SELECT COUNT(*) FROM bettingtracker),2) AS averagestake FROM bettingtracker";
     $result6 = mysqli_query($conn,$sql6);
-   
+  
   while($r = mysqli_fetch_array($result6))
   {
       echo  $r['averagestake'];
-     
+      print "</td> <td>";
+    
     
   }
+  $sql7 = "SELECT SUM(amount) as totalwithdrawals from withdrawals";
+               $result = mysqli_query($conn,$sql7);
+             
+             
+              while($r = mysqli_fetch_array($result))
+             {
+                echo  $r['totalwithdrawals']; 
+                
+             }
 
     ?>
     </table>
