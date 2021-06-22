@@ -565,7 +565,7 @@
                print "</td> <td>";
               
            }
-           $sql = "SELECT SUM(amount) as maytotalwithdrawals from withdrawals WHERE MONTH(date) = 05 AND YEAR(date) = 2021";
+           $sql = "SELECT SUM(amount) as maytotalwithdrawals from withdrawals WHERE MONTH(date) = 05";
                $result = mysqli_query($conn,$sql);
              
              
