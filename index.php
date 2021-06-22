@@ -43,9 +43,10 @@
          </td> <td>
         <select name="sports" id="sports">
         <option value="">--select--</option>
-        <option value="Football">soccer</option>
+        <option value="soccer">soccer</option>
         <option value="Basketball">basketball</option>
         <option value="Darts">darts</option>
+        <option value="Volleyball">Volleyball</option>
         <option value="Baseball">baseball</option>
         <option value="Tennis">tennis</option>
         <option value="Rugby">rugby</option>
@@ -69,16 +70,19 @@
             <select name="punter" id="punter">
             <option value="">--select--</option>
             <option value="Pyscho">Pyscho</option>
-            <option value="Odds Mafia">Odds Mafia</option>
+            <option value="Getrichquick2021">Getrichquick2021</option>
             <option value="el Professor Wiz">el Professor Wiz</option>
             <option value="Pusha Punters">Pusha Punters</option>
-            <option value="Getrichquick2021">Getrichquick2021</option>
+            <option value="WINNERS CLUB">WINNERS CLUB</option>
+            <option value="Betting Kingz">Betting Kingz</option>
+            <option value="KingSila">KingSila</option>
+            <option value="Twitter feed">Twitter feed</option>
             <option value="Green Hoodie">Green Hoodie</option>
             <option value="Boom Squad">Boom Squad</option>
-            <option value="SQ Mweza">SQ Mweza</option>
             <option value="Twitter feed">Twitter feed</option>
             <option value="Facebook feed">Facebook feed</option>
             <option value="Whatsapp feed">Whatsapp feed</option>
+            <option value="Odds Mafia">Odds Mafia</option>
           </select>
         
           
@@ -95,10 +99,11 @@
                 </td> <td>
                 <select name="bookie" id="bookie">
                 <option value="">--select--</option>
-                <option value="betway">betway</option>
+                <option value="1xbet">1xbet</option>
+                <option value="betway 1">betway 1</option>
+                <option value="betway 2">betway 2</option>
                 <option value="sportingbet 1">sportingbet 1</option>
                 <option value="sportingbet 2">sportingbet 2</option>
-                <option value="1xbet">1xbet</option>
                 <option value="gbets">gbets</option>
               </select>
              
