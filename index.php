@@ -1,7 +1,10 @@
 <?php
-    include_once 'includes/dbh.inc.php';
-  
+    include_once 'includes/dbh.inc.php'; 
 ?>
+<style>
+<?php include 'includes/main.css'; 
+?>
+</style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingSila Bets Tracker</title>
-    <link rel="stylesheet" href="includes/main.css">
+   
     <style>
      * {
     box-sizing: border-box;
@@ -25,18 +28,18 @@
     
     <form action="includes/betsentry.inc.php" method="post">
 
-    <h1>KingSports Betting Tracker</h1>
+    <h1>Sports Betting Tracker</h1>
 
           <table border="2">
           <tr>
           <th>Date</th>
-<th>Sport</th>
-<th>Punter</th>
-<th>Bookie</th>
-<th>Odds </th>
-<th>Rands Staked </th>
-<th>Result </th>
-<th>Profit/Loss</th>
+          <th>Sport</th>
+          <th>Punter</th>
+          <th>Bookie</th>
+          <th>Odds </th>
+          <th>Rands Staked </th>
+          <th>Result </th>
+          <th>Profit/Loss</th>
           </tr>
         </td> <td>
         <input type="date" name="betdate" placeholder="Betdate">
@@ -262,7 +265,6 @@
     </table>
  
      
-    <label for="SEPARATOR">===========================================================================================================</label><br>
     <label for="SEPARATOR">Yesterday</label>
     <table border="2">
           <tr>
@@ -343,7 +345,6 @@
       ?>
       </table>
 
-      <label for="SEPARATOR">===========================================================================================================</label><br>
       <label for="SEPARATOR">Last 7 Days</label>
       <table border="2">
           <tr>
@@ -423,7 +424,6 @@
        ?>
        </table>
 
-       <label for="SEPARATOR">===========================================================================================================</label><br>
       <label for="SEPARATOR">Last 30 Days</label>
 
       <table border="2">
@@ -500,13 +500,10 @@
        ?>
         </table>
 
-        <label for="SEPARATOR">===========================================================================================================</label><br>
-        <label for="SEPARATOR">Monthly Stats</label><br>
-        <label for="SEPARATOR">MAY 2021</label>
           
-      <table border="2">
+      <table align="right" border="2">
           <tr>
-           <th>Number of Picks</th>
+           <th>MAY 2021 Stats- Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
            <th>Total Deposits</th>
@@ -580,12 +577,10 @@
         ?>
         </table>
         
-        <label for="SEPARATOR">===========================================================================================================</label><br>
-        <label for="SEPARATOR">JUNE 2021</label>
           
-      <table border="2">
+      <table align="right" border="2">
           <tr>
-           <th>Number of Picks</th>
+           <th>JUNE 2021 Stats- Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
            <th>Total Deposits</th>
