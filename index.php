@@ -28,7 +28,7 @@
     
     <form action="includes/betsentry.inc.php" method="post">
 
-    <h1>Sports Betting Tracker</h1>
+    <h1>SPORTS BETTING TRACKER</h1>
 
           <table border="2">
           <tr>

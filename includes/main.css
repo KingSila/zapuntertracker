@@ -1,12 +1,16 @@
 body
 {
-  background-image:url(images/background.jpg);
+  background-color:#659DBD ;
+  color:white;
+  font-size: 19;
+  
 }
 
 h1 {
     width:500px;
     margin: 0 auto;
     text-align: center;
+    color:White;
 }
 /* Create three equal columns that floats next to each other */
 .column {
