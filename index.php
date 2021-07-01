@@ -158,17 +158,17 @@
         </tr>
         </table>    
 
-        <label for="SEPARATOR">===========================================================================================================</label>
+        <label for="SEPARATOR">=================================================================</label>
          
         <table border="2">
           <tr>
            <th>Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
-           <th>Average Odds </th>
+           <th>Avg Odds </th>
            <th>Rands Staked </th>
            <th>Total Profit </th>
-           <th>Average Stake </th>
+           <th>Avg Stake </th>
            <th>Total withdrawals </th>
          </tr>
     
@@ -262,7 +262,7 @@
            <th>Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
-           <th>Average Odds </th>
+           <th>Avg Odds </th>
            <th>Rands Staked </th>
            <th>Total Profit </th>
          </tr>
@@ -342,7 +342,7 @@
            <th>Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
-           <th>Average Odds </th>
+           <th>Avg Odds </th>
            <th>Rands Staked </th>
            <th>Total Profit </th>
          </tr>
@@ -422,7 +422,7 @@
            <th>Number of Picks</th>
            <th>Wins</th>
            <th>Win%</th>
-           <th>Average Odds </th>
+           <th>Avg Odds </th>
            <th>Rands Staked </th>
            <th>Total Profit </th>
          </tr>
@@ -492,9 +492,15 @@
         </table>
 
           
-      <table align="right" border="2">
+      <table align='right' border="2">
+      <col width="90">
+      <col width="50">
+      <col width="50">
+      <col width="110">
+      <col width="120">
+      <col width="150">
           <tr>
-           <th>MAY 2021 Stats- Number of Picks</th>
+           <th>MAY Picks</th>
            <th>Wins</th>
            <th>Win%</th>
            <th>Total Deposits</th>
@@ -563,15 +569,20 @@
                 
              }
 
-
-
         ?>
         </table>
-        
-          
-      <table align="right" border="2">
+
+        <label for="SEPARATOR">===========================================================================</label>
+      
+      <table align='right' border="2">
+      <col width="90">
+      <col width="50">
+      <col width="50">
+      <col width="110">
+      <col width="120">
+      <col width="150">
           <tr>
-           <th>JUNE 2021 Stats- Number of Picks</th>
+           <th>JUNE Picks</th>
            <th>Wins</th>
            <th>Win%</th>
            <th>Total Deposits</th>
@@ -642,6 +653,89 @@
 
         ?>
         </table>
+
+    <label for="SEPARATOR">============================================================================</label>
+  
+      <table align='right' border="2">
+      <col width="90">
+      <col width="50">
+      <col width="50">
+      <col width="110">
+      <col width="120">
+      <col width="150">
+          <tr>
+           <th>JULY Picks</th>
+           <th>Wins</th>
+           <th>Win%</th>
+           <th>Total Deposits</th>
+           <th>Total Profit/Loss</th>
+           <th>Total withdrawals </th>
+         </tr>
+         <?php
+                  $sql = "SELECT count(*) as julytotal  FROM `bettingtracker` 
+                  WHERE MONTH(date) = 07 AND YEAR(date) = 2021";
+                  $result = mysqli_query($conn,$sql);
+                 
+                  print "</td> <td>";
+                while($r = mysqli_fetch_array($result))
+                {
+                    echo  $r['julytotal']; 
+                    print "</td> <td>";
+                }
+                $sql = "SELECT count(*) as julywinstotal FROM `bettingtracker` WHERE MONTH(date) = 07 AND YEAR(date) = 2021
+                and outcome='Win'";
+               $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+               {
+                  echo  $r['julywinstotal']; 
+                 print "</td> <td>";
+               }
+    
+               $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE MONTH(date) = 07 AND YEAR(date) = 2021)
+               AS julywin_percentage FROM `bettingtracker` WHERE MONTH(date) = 07 AND YEAR(date) = 2021
+                and outcome='Win'";
+                $result = mysqli_query($conn,$sql);
+              
+              
+               while($r = mysqli_fetch_array($result))
+              {
+                 echo  $r['julywin_percentage']; 
+                 print "</td> <td>";
+              }
+              $sql = "SELECT SUM(amount) as julydeposit from deposits WHERE MONTH(date) = 07 AND YEAR(date) = 2021";
+               $result = mysqli_query($conn,$sql);
+             
+             
+              while($r = mysqli_fetch_array($result))
+             {
+                echo  $r['julydeposit']; 
+                print "</td> <td>";
+             }
+             $sql = "SELECT sum(pnl)  as julypnl FROM `bettingtracker` WHERE MONTH(date) = 07 ";
+             $result = mysqli_query($conn,$sql);
+            
+            
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['julypnl']; 
+               print "</td> <td>";
+              
+           }
+           $sql = "SELECT SUM(amount) as julytotalwithdrawals from withdrawals WHERE MONTH(date) = 07 ";
+           $result = mysqli_query($conn,$sql);
+         
+         
+          while($r = mysqli_fetch_array($result))
+         {
+            echo  $r['julytotalwithdrawals']; 
+            
+         }
+
+        ?>
+        </table>
+
 
 </body>
 </html>
