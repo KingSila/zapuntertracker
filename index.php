@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KingSila Bets Tracker</title>
+    <title>Daily Summary Bets Tracker</title>
    
     <style>
      * {
@@ -28,68 +28,19 @@
     
     <form action="includes/betsentry.inc.php" method="post">
 
-    <h1>SPORTS BETTING TRACKER</h1>
+    <h1>DAILY PROFIT TRACKER</h1>
 
           <table border="2">
           <tr>
           <th>Date</th>
-          <th>Sport</th>
-          <th>Punter</th>
           <th>Bookie</th>
-          <th>Odds </th>
-          <th>Rands Staked </th>
-          <th>Result </th>
-          <th>Profit/Loss</th>
+          <th>No of wins</th>
+          <th>No of losses</th>
+          <th>Total Return</th>
           </tr>
         </td> <td>
-        <input type="date" name="betdate" placeholder="Betdate">
-        </td> <td>
-        <select name="sports" id="sports">
-        <option value="">--select--</option>
-        <option value="soccer">soccer</option>
-        <option value="Basketball">basketball</option>
-        <option value="Darts">darts</option>
-        <option value="Volleyball">Volleyball</option>
-        <option value="Baseball">baseball</option>
-        <option value="Tennis">tennis</option>
-        <option value="Rugby">rugby</option>
-        <option value="Horse Racing">horseracing</option>
-        </select>
-  
-      
-          <script type="text/javascript">
-          const element = document.getElementById("sports");
-      
-            element.addEventListener("change", (e) => {
-            const value = e.target.value;
-            const text = element.options[element.selectedIndex].text;
-          
-          
-          });
-          </script>
-
-  
-            </td> <td>
-            <select name="punter" id="punter">
-            <option value="">--select--</option>
-            <option value="Social media feed">Social media feed</option>
-            <option value="Pyscho">Pyscho</option>
-            <option value="KingSila">KingSila</option>
-            <option value="Odds Mafia">Odds Mafia</option>
-          </select>
-        
-          
-    <script type="text/javascript">
-            const punterelement = document.getElementById("punter");
-      
-            punterelement.addEventListener("change", (i) => {
-            const puntervalue = i.target.value;
-            const puntertext = punterelement.options[punterelement.selectedIndex].text;
-        
-          });
-          </script>
-        
-                </td> <td>
+          <input type="date" name="betdate" placeholder="Betdate">
+          </td> <td>
                 <select name="bookie" id="bookie">
                 <option value="">--select--</option>
                 <option value="sunbet">sunbet</option>
@@ -111,118 +62,66 @@
                
                   });
                   </script>
-         
-           
-                  </td> <td>
-                  <input type="text" id="odds" name="odds" maxlength="8" size="4">
-                  </td> <td>
-                  <input type="text" id="stake" name="stake" maxlength="4" size="4" class="form-control"> 
-                  </td> <td>
-                  <select name="result" id="result">
-                  <option value="">--select--</option>
-                  <option value="Win">Win</option>
-                  <option value="Lose">Lose</option>
-                  <option value="Cashout stake">Cashout stake</option>
-                  <option value="Cashout half Stake">Cashout half Stake</option>
-                  <option value="Cashout 2X stake">Cashout 2X stake</option>
-                  <option value="Cashout 80% Return">Cashout 80% Return</option>
-                  </select>
-                  
-                  
-                 <script type="text/javascript">
-                const resultelement = document.getElementById("result");
-               
-                 resultelement.addEventListener("change", (k) => {
-                    const resultvalue = k.target.value;
-                    const resulttext = resultelement.options[resultelement.selectedIndex].text;
-                   
-                    if (resultvalue) {
-                      getInputValue();
-      
-                  } else {
-                      document.getElementById("pnl").value = 0.00;
-                      
-                    }
-                  });
-                  </script>
-                </div>
-            
-           
-                </td> <td>
-                <input type="text" name='pnl' value='0.00' id="pnl" size="6">
-                </td> <td>
-                <button type="submit" name="submit">Add bet</button>
+         </td> <td>
+          <input type="text" id="wpicks" name="wpicks" maxlength="8" size="4">
+          </td> <td>
+          <input type="text" id="lpicks" name="lpicks" maxlength="8" size="4">
+          </td> <td>
+          <input type="text" id="return" name="return" value='0.00' maxlength="8" size="8" class="form-control"> 
+          </td> <td>
+        </div>
+        </td> <td>
+                <button type="submit" name="submit">Add Results</button>
             </div>
-           
         </form>
         </tr>
         </table>    
 
         <label for="SEPARATOR">=================================================================</label>
-         
         <table border="2">
           <tr>
            <th>Number of Picks</th>
            <th>Wins</th>
-           <th>Win%</th>
-           <th>Avg Odds </th>
-           <th>Rands Staked </th>
-           <th>Total Profit </th>
-           <th>Avg Stake </th>
+           <th>Lose</th>
+           <th>Profit/Loss </th>
            <th>Total withdrawals </th>
          </tr>
     
          <?php
              
-              $sql = "SELECT COUNT(*) as betstotal from bettingtracker";
+              $sql = "SELECT sum(losepicks+winpicks) as totalpicks FROM `dailysummary`";
               $result = mysqli_query($conn,$sql);
              
               print "</td> <td>";
             while($r = mysqli_fetch_array($result))
             {
-                echo  $r['betstotal']; 
+                echo  $r['totalpicks']; 
                 print "</td> <td>";
             }
             
 
-            $sql1 = "SELECT COUNT(*) as wins from bettingtracker where outcome='Win'";
+            $sql1 = "SELECT sum(winpicks) as totalwinpicks FROM `dailysummary`";
             $result1 = mysqli_query($conn,$sql1);
            
           while($r = mysqli_fetch_array($result1))
           {
-              echo  $r['wins'];
+              echo  $r['totalwinpicks'];
               print "</td> <td>";
           }
 
-          $sql2 = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker)
-          AS win_percentage FROM bettingtracker where outcome='Win'";
+          $sql2 = "SELECT sum(losepicks) as totallosewinpicks FROM `dailysummary`";
           $result2 = mysqli_query($conn,$sql2);
          
         while($r = mysqli_fetch_array($result2))
         {
-            echo  $r['win_percentage'];
+            echo  $r['totallosewinpicks'];
             print "</td> <td>";
         }
 
-        $sql3 = "SELECT ROUND(sum(odds)/count(*),2) as average_odds FROM `bettingtracker`";
-          $result3 = mysqli_query($conn,$sql3);
-         
-        while($r = mysqli_fetch_array($result3))
-        {
-            echo  $r['average_odds'];
-            print "</td> <td>";
-        }
+   
 
-        $sql4 = "SELECT SUM(stake) as rands_staked FROM `bettingtracker`";
-        $result4 = mysqli_query($conn,$sql4);
-       
-      while($r = mysqli_fetch_array($result4))
-      {
-          echo  $r['rands_staked'];
-          print "</td> <td>";
-      }
 
-      $sql5 = "SELECT ROUND(SUM(pnl), 2) as Total_Profit FROM `bettingtracker`";
+      $sql5 = "SELECT ROUND(SUM(pnl), 2) as Total_Profit FROM `dailysummary`";
       $result5 = mysqli_query($conn,$sql5);
      
     while($r = mysqli_fetch_array($result5))
@@ -232,16 +131,7 @@
       
     }
 
-    $sql6 = "SELECT ROUND(SUM(STAKE) / (SELECT COUNT(*) FROM bettingtracker),2) AS averagestake FROM bettingtracker";
-    $result6 = mysqli_query($conn,$sql6);
-  
-  while($r = mysqli_fetch_array($result6))
-  {
-      echo  $r['averagestake'];
-      print "</td> <td>";
-    
-    
-  }
+ 
   $sql7 = "SELECT SUM(amount) as totalwithdrawals from withdrawals";
                $result = mysqli_query($conn,$sql7);
              
@@ -261,75 +151,51 @@
           <tr>
            <th>Number of Picks</th>
            <th>Wins</th>
-           <th>Win%</th>
-           <th>Avg Odds </th>
-           <th>Rands Staked </th>
-           <th>Total Profit </th>
+           <th>Lose</th>
+           <th>Profit/Loss</th>
          </tr>
 
          <?php
              
-             $sql = "SELECT count(*) as yesterdaybetstotal FROM `bettingtracker` 
+             $sql = "SELECT sum(losepicks+winpicks) as ytotalpicks FROM `dailysummary` 
              WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)";
              $result = mysqli_query($conn,$sql);
             
              print "</td> <td>";
            while($r = mysqli_fetch_array($result))
            {
-               echo  $r['yesterdaybetstotal']; 
+               echo  $r['ytotalpicks']; 
                print "</td> <td>";
            }
 
-           $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
-            and outcome='Win'";
+           $sql = "SELECT sum(winpicks) as ytotalwinpicks FROM `dailysummary` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)";
            $result = mysqli_query($conn,$sql);
           
           
          while($r = mysqli_fetch_array($result))
          {
-             echo  $r['winstotal']; 
+             echo  $r['ytotalwinpicks']; 
              print "</td> <td>";
          }
 
-         $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY))
-         AS ywin_percentage FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
-            and outcome='Win'";
+         $sql = "SELECT sum(losepicks) as losepicks FROM `dailysummary` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)";
            $result = mysqli_query($conn,$sql);
           
           
          while($r = mysqli_fetch_array($result))
          {
-             echo  $r['ywin_percentage']; 
+             echo  $r['losepicks']; 
              print "</td> <td>";
          }
-         $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
-          ";
-           $result = mysqli_query($conn,$sql);
-          
-          
-         while($r = mysqli_fetch_array($result))
-         {
-             echo  $r['yaverage_odds']; 
-             print "</td> <td>";
-         }
-         $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
-         ";
-          $result = mysqli_query($conn,$sql);
-         
-         
-        while($r = mysqli_fetch_array($result))
-        {
-            echo  $r['yrandsstaked']; 
-            print "</td> <td>";
-        }
-        $sql = "SELECT sum(pnl) as ypnl FROM `bettingtracker` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
+        
+        $sql = "SELECT ROUND(SUM(pnl), 2) as yTotal_Profit FROM `dailysummary` WHERE date(date)= DATE(NOW() - INTERVAL 1 DAY)
         ";
          $result = mysqli_query($conn,$sql);
         
         
        while($r = mysqli_fetch_array($result))
        {
-           echo  $r['ypnl']; 
+           echo  $r['yTotal_Profit']; 
           
        }
 
@@ -339,68 +205,48 @@
       <label for="SEPARATOR">Last 7 Days</label>
       <table border="2">
           <tr>
-           <th>Number of Picks</th>
+          <th>Number of Picks</th>
            <th>Wins</th>
-           <th>Win%</th>
-           <th>Avg Odds </th>
-           <th>Rands Staked </th>
-           <th>Total Profit </th>
+           <th>Lose</th>
+           <th>Profit/Loss</th>
          </tr>
        
          <?php
              
-             $sql = "SELECT count(*) as yesterdaybetstotal FROM `bettingtracker` 
+             $sql = "SELECT sum(losepicks+winpicks) as weektotalpicks FROM `dailysummary`
              WHERE date > now() - INTERVAL 7 day";
              $result = mysqli_query($conn,$sql);
             
              print "</td> <td>";
            while($r = mysqli_fetch_array($result))
            {
-               echo  $r['yesterdaybetstotal']; 
+               echo  $r['weektotalpicks']; 
                print "</td> <td>";
            }
 
-           $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day
-            and outcome='Win'";
+           $sql = "SELECT sum(winpicks) as weektotalwinpicks FROM `dailysummary` WHERE date > now() - INTERVAL 7 day
+           ";
            $result = mysqli_query($conn,$sql);
           
           
          while($r = mysqli_fetch_array($result))
          {
-             echo  $r['winstotal']; 
+             echo  $r['weektotalwinpicks']; 
              print "</td> <td>";
          }
 
-         $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date > now() - INTERVAL 7 day)
-         AS ywin_percentage FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day
-            and outcome='Win'";
+         $sql = "SELECT sum(losepicks) as weeklosepicks FROM `dailysummary` WHERE date > now() - INTERVAL 7 day
+           ";
            $result = mysqli_query($conn,$sql);
           
           
          while($r = mysqli_fetch_array($result))
          {
-             echo  $r['ywin_percentage']; 
+             echo  $r['weeklosepicks']; 
              print "</td> <td>";
          }
-         $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
-           $result = mysqli_query($conn,$sql);
-          
-          
-         while($r = mysqli_fetch_array($result))
-         {
-             echo  $r['yaverage_odds']; 
-             print "</td> <td>";
-         }
-         $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
-          $result = mysqli_query($conn,$sql);
          
-         
-        while($r = mysqli_fetch_array($result))
-        {
-            echo  $r['yrandsstaked']; 
-            print "</td> <td>";
-        }
-        $sql = "SELECT sum(pnl)  as weekpnl FROM `bettingtracker` WHERE date > now() - INTERVAL 7 day";
+        $sql = "SELECT sum(pnl)  as weekpnl FROM `dailysummary` WHERE date > now() - INTERVAL 7 day";
         $result = mysqli_query($conn,$sql);
        
        
@@ -419,75 +265,57 @@
 
       <table border="2">
           <tr>
-           <th>Number of Picks</th>
+          <th>Number of Picks</th>
            <th>Wins</th>
-           <th>Win%</th>
-           <th>Avg Odds </th>
-           <th>Rands Staked </th>
-           <th>Total Profit </th>
+           <th>Lose</th>
+           <th>Profit/Loss</th>
          </tr>
-       
          <?php
-                  $sql = "SELECT count(*) as monthbetstotal FROM `bettingtracker` 
-                  WHERE date > now() - INTERVAL 30 day";
-                  $result = mysqli_query($conn,$sql);
-                 
-                  print "</td> <td>";
-                while($r = mysqli_fetch_array($result))
-                {
-                    echo  $r['monthbetstotal']; 
-                    print "</td> <td>";
-                }
-                $sql = "SELECT count(*) as winstotal FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day
-                and outcome='Win'";
-               $result = mysqli_query($conn,$sql);
-              
-              
-             while($r = mysqli_fetch_array($result))
-             {
-                 echo  $r['winstotal']; 
-                 print "</td> <td>";
-             }
-    
-             $sql = "SELECT COUNT(*) AS win_cnt, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM bettingtracker WHERE date > now() - INTERVAL 30 day)
-             AS ywin_percentage FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day
-                and outcome='Win'";
-               $result = mysqli_query($conn,$sql);
-              
-              
-             while($r = mysqli_fetch_array($result))
-             {
-                 echo  $r['ywin_percentage']; 
-                 print "</td> <td>";
-             }
-             $sql = "SELECT ROUND(sum(odds)/count(*),2) as yaverage_odds FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
-               $result = mysqli_query($conn,$sql);
-              
-              
-             while($r = mysqli_fetch_array($result))
-             {
-                 echo  $r['yaverage_odds']; 
-                 print "</td> <td>";
-             }
-             $sql = "SELECT sum(stake)  as yrandsstaked FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
-              $result = mysqli_query($conn,$sql);
              
-             
-            while($r = mysqli_fetch_array($result))
-            {
-                echo  $r['yrandsstaked']; 
-                print "</td> <td>";
-            }
-            $sql = "SELECT sum(pnl)  as weekpnl FROM `bettingtracker` WHERE date > now() - INTERVAL 30 day";
-            $result = mysqli_query($conn,$sql);
-           
-           
-          while($r = mysqli_fetch_array($result))
-          {
-              echo  $r['weekpnl']; 
-             
-          }
-   
+             $sql = "SELECT sum(losepicks+winpicks) as monthtotalpicks FROM `dailysummary`
+             WHERE date > now() - INTERVAL 30 day";
+             $result = mysqli_query($conn,$sql);
+            
+             print "</td> <td>";
+           while($r = mysqli_fetch_array($result))
+           {
+               echo  $r['monthtotalpicks']; 
+               print "</td> <td>";
+           }
+
+           $sql = "SELECT sum(winpicks) as monthtotalwinpicks FROM `dailysummary` WHERE date > now() - INTERVAL 30 day
+           ";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['monthtotalwinpicks']; 
+             print "</td> <td>";
+         }
+
+         $sql = "SELECT sum(losepicks) as monthlosepicks FROM `dailysummary` WHERE date > now() - INTERVAL 30 day
+           ";
+           $result = mysqli_query($conn,$sql);
+          
+          
+         while($r = mysqli_fetch_array($result))
+         {
+             echo  $r['monthlosepicks']; 
+             print "</td> <td>";
+         }
+         
+        $sql = "SELECT sum(pnl)  as monthpnl FROM `dailysummary` WHERE date > now() - INTERVAL 30 day";
+        $result = mysqli_query($conn,$sql);
+       
+       
+      while($r = mysqli_fetch_array($result))
+      {
+          echo  $r['monthpnl']; 
+         
+      }
+
+      
        ?>
         </table>
 
